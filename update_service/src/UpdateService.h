@@ -1,3 +1,6 @@
+
+#include "Network/NetworkClientController.h"
+
 #include <iostream>
 #include <string_view>
 
@@ -18,17 +21,12 @@ public:
      * @param port The port of the server to connect to
      */
     UpdateService(std::string_view ip, int port);
+
     ~UpdateService();
 
     void start();
 
 private:
-
-
-    /**
-     * @brief This function is used to receive the list of files to be changed
-     */
-    virtual void receiveFileList();
 
     /**
      * @brief This function is used to connect to the server
@@ -38,7 +36,4 @@ private:
      */
     bool connect(std::string_view ip, int port);
 
-
-    void update();
-    int get_needed_update_flag();
 };
