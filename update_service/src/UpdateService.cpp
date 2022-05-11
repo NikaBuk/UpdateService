@@ -28,8 +28,7 @@ UpdateService::UpdateService(std::string_view ip, int port) {
         return JSONController::check_convertable(file_data.str()) ? file_data.str() : "";
     });
 
-    NetworkClientController network_client_controller(ip, port);
-    network_client_controller.connect();
+    network_client_controller.reset(new NetworkClientController(ip, port));
 
 
     file_future.wait();
@@ -37,15 +36,10 @@ UpdateService::UpdateService(std::string_view ip, int port) {
     if (json_dump_string.empty()) {
         std::cout << "Could not parse config.json" << std::endl;
     }
-
-    network_client_controller.send(json_dump_string);
+    network_client_controller->connect();
+//    network_client_controller->send(json_dump_string);
 }
 
-bool UpdateService::connect(std::string_view ip, int port) {
-    ///use boost for connecting to the server
-    boost::asio::io_context io_context;
-    return true;
-}
 
 void UpdateService::start() {
     std::cout << "UpdateService::start()" << std::endl;

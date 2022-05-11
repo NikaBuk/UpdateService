@@ -16,7 +16,9 @@ set( CMAKE_CXX_FLAGS_DEBUG "-g3 -O0" )
 set( CMAKE_CXX_FLAGS_RELEASE "-O3" )
 
 add_library( update_service_lib SHARED ${SRC_FILES} )
-
+set( OPENSSL_ROOT_DIR "/home/nikasilya/CLionProjects/UpdateService/update_service/third-party/openssl-3.0.3" )
+find_package( OpenSSL REQUIRED )
+target_link_libraries( update_service_lib OpenSSL::SSL )
 #TODO: add logging library
 
 set( Boost_ROOT $ENV{BOOST_DIR} )

@@ -24,16 +24,16 @@ public:
 
     ~UpdateService();
 
+    /**
+     * @brief Main function of the program
+     *        It connects to the server, receives the list of files to be changed,
+     *        and then receives the files themselves.
+     *        It then updates the files and then exits.
+     *        If something goes wrong, it prints an error message and exits.
+     *
+     */
     void start();
 
 private:
-
-    /**
-     * @brief This function is used to connect to the server
-     * @param ip - address of the server
-     * @param port - port of the server
-     * @return true if the connection was successful, false otherwise
-     */
-    bool connect(std::string_view ip, int port);
-
+    boost::asio::detail::scoped_ptr<NetworkClientController> network_client_controller;
 };
